@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import socket
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,9 +24,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '4(s3mzwk94ol3yqic61c_$v6fv^#+6v&+&kr^6c4q828#b!$=1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# print (socket.gethostname())
+if socket.gethostname() == 'Claymore':
+    DEBUG = True
+else:
+    DEBUG = False
 
-ALLOWED_HOSTS = ['120.24.211.13',]
+ALLOWED_HOSTS = ['120.24.211.13','localhost']
 
 
 # Application definition
@@ -77,8 +82,12 @@ WSGI_APPLICATION = 'Blog_Django_py3.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'djangoBlogDB',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
@@ -121,3 +130,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'static'),)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')

@@ -1,0 +1,20 @@
+*** Starting uWSGI 2.0.15 (64bit) on [Fri Aug 11 21:39:09 2017] ***
+compiled with version: 5.4.0 20160609 on 10 August 2017 19:30:25
+os: Linux-4.4.0-63-generic #84-Ubuntu SMP Wed Feb 1 17:20:32 UTC 2017
+nodename: Claymore
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 1
+current working directory: /root/workspacePy/Django/Blog_Django_py3
+detected binary path: /root/miniconda2/envs/py3Django/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /root/workspacePy/Django/Blog_Django_py3
+your processes number limit is 3819
+your memory page size is 4096 bytes
+detected max file descriptor number: 65535
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (:8000).
+bind(): Address already in use [core/socket.c line 769]

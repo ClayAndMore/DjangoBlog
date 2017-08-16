@@ -1,0 +1,40 @@
+{% extends "index_basic.html" %}
+
+{% block css_content %}
+<style type="text/css">
+#id_name{
+	
+}
+</style>
+{% endblock %}
+
+{% block main_body %}
+<div class="container">
+<form class="form-horizontal" action="" method="post">
+	{% csrf_token %}
+	<div class="form-group">
+		<p class="col-sm-3"><p>
+		<div class="col-sm-6">
+		{{ form.content }}
+		</div>
+		<p class="col-sm-3"><p>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">起个名字：</label>
+		<div class="col-sm-3">
+		{{ form.name }}
+		</div>
+		<div class="col-sm-5">
+			<button type="submit" class="btn btn-info"  />踩~</button>
+		</div>
+	</div>
+</form>
+</div>
+
+
+<script type="text/javascript">
+$("#id_name").addClass("form-control");
+$("#id_content").addClass("form-control");
+$("#id_content").attr({"placeholder":"说点啥吧。。。","rows":"3"});
+</script>
+{% endblock %}

@@ -8,13 +8,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-# 首页
-@api_view(['GET'])
-def index(request):
-    return Response('post首页')
-
 # 定义一个全局变量，用于标识当前用户所在页级
-find_dir = '' 
+find_dir = '/root/posts' 
 
 # 博客列表
 def get_posts_list(request, post_class, post_type):
@@ -51,12 +46,12 @@ def get_post(request, inum):
         file_popen.close()
         with open(file_path) as f:
             file_content = f.read()
-            print(file_content)
             #return Response(f.read())
             return render(request, 'post_content.html',{'file_content':file_content})
     except Exception as e:
         print(Exception)
         print(e)
+        print('dddddddd')
         # return Response('不可修改参数')
         return render(request, 'post_content.html')
 
