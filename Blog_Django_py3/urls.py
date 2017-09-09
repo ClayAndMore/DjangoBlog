@@ -24,5 +24,7 @@ urlpatterns = [
     url(r'^$', views.index, name = 'index'),
     url(r'^aboutme/$', views.about_me, name = 'aboutMe'),
     url(r'^messages/$', views.message, name = 'messages'),
+    url(r'^mylife/$', views.mylife, name = 'life'),
+    url(r'^life_list/(?P<year>[0-9]{4})/$', views.life_list, name='life_list'),
     url(r'^p/', include('blog.urls')),
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

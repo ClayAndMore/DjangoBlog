@@ -4,11 +4,12 @@ import datetime
 
 from .form import MessageForm 
 sys.path.append("..") # 将上级目录导入环境变量
-from blog.models import Message 
+from blog.models import Message, Essay, Images
+from blog.serializers import EssaySerializer,ImagesSerializer
 
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -51,3 +52,20 @@ def message(request):
 
 def archiving(requst):
     return None
+
+def mylife(request):
+    years = Essay.objects.values('text_time')
+    years_dis = set()
+    for year in years:
+        years_dis.add(year['text_time'].year)
+    return render(request, 'life.html', {'years_dis':sorted(years_dis)}) 
+
+@api_view(['GET'])
+def life_list(request, year):
+    try:
+        essaies = Essay.objects.filter(text_time__year=year).order_by('text_time')
+    except Exception:
+        print(Exception)
+    #image = essaies[0].essay.all()
+    serializer = EssaySerializer(essaies,many=True)
+    return Response(serializer.data)

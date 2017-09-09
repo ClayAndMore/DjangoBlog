@@ -1,0 +1,37 @@
+.circle_btn {
+    border-radius: 50px;
+    /*border: 2px solid #8AC007;*/
+    border: 1px solid red;
+	background: none;
+	/*color: ;*/
+    font-weight: bold;
+    font-size: 12px;
+    padding: 20px;
+    width: 45px;
+    height: 45px;
+    position: fixed;
+    bottom: 5px;
+}
+
+.panel-success{
+    border-color: #d6e9c6;
+}
+.panel-success>.panel-heading{
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.img-rounded{
+    width: 324px;
+    height: 200px;
+}
+
+#time_bottom{
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    /*width: 800px;*/
+    /*margin: 0 auto;*/
+    /*text-align: center;*/
+}
