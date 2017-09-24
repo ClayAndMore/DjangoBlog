@@ -2,10 +2,12 @@ $(function () {
      var date = new Date()
      var year = date.getFullYear().toString();
      life_list(year);
-     var img = document.getElementsByClassName('img-rounded');
-     console.log(img);
-     getNaturalWidth(img);
 });
+
+window.onload=function(){ 
+     var img = document.getElementsByClassName('img-rounded');
+     getNaturalWidth(img);
+} 
 
 
 function life_list(data) {
@@ -39,6 +41,7 @@ function getNaturalWidth(img) {
 	}
     }
 }
+
 
 
 function render_life(data){
