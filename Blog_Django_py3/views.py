@@ -8,7 +8,7 @@ from blog.models import Message, Essay, Images
 from blog.serializers import EssaySerializer,ImagesSerializer
 
 from django.shortcuts import render
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseRedirect,HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -18,6 +18,7 @@ def index(request):
     return HttpResponseRedirect(reverse("aboutMe"))
 
 def about_me(request):
+    print('AAAAAAA')
     return render(request, 'aboutMe.html')
 
 def message(request):
