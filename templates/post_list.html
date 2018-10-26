@@ -1,5 +1,10 @@
 {% extends "index_basic.html" %}
 
+{% block css_content %}
+<script src="/static/js/bootstrap-treeview.js"></script>
+<script src="/static/css/bootstrap-treeview.css"></script>
+{% endblock %}
+
 {% block main_body %}
     <!--<div class="bs-component" style="margin: 0px">-->
     <!--    <ul class="breadcrumb" style="margin: 0px">-->
@@ -11,8 +16,9 @@
 
     <div class="container">
       <div class="row">
-        <div class="list-group col-xs-8">
-	 {% for da in data %}
+        <div id="tree" class="col-xs-3 pull-left"></div>
+        <div class="list-group col-xs-9">
+	{% for da in data %}
 	 <a href="{% url 'post' inum=da.inum %}" class="list-group-item">
 		<h4 class="list-group-item-heading" style="display:inline">{{ da.title }}</h4>
 		<h5 style="display:inline;float:right" >{{ da.time }}</h5>
@@ -20,7 +26,9 @@
 	<br>
 	{% endfor %}
         </div>
-        <div class="col-xs-4">
+      </div>
+    </div>
+    <div class="">
           <div class="bs-component">
               <blockquote>
                 <p>没有什么是一顿烧烤是解决不了的，如果有，那么就两顿</p>
@@ -33,7 +41,75 @@
                 <small> 春风十里 <cite title="Source Title">不如你</cite></small>
               </blockquote>
         </div>
-      </div>
-    </div>
+    
+    <script>
+         function dir_list() {
+             console.log("CCCCCCCCCCC");
+             var url = "/p/dir_list/";
+             var back = [];
+             $.ajax({
+                 type: "get",
+                 url: url,
+                 async: false,
+                 dataType: "json",
+                 success: function (result) {
+                      back = result;
+                      console.log('aaaaaaaaa');
+                      console.log(back);
+                      console.log(getTree());
+                 // console.log(result);
+                 //render_life(result);
+                 },
+                  error: function(XMLHttpRequest, textStatus, errorThrown) {
+                      //alert(XMLHttpRequest.status);
+                      alert(XMLHttpRequest.readyState);
+                      alert(textStatus);
+                  },
+             });
+             console.log("bbbbbbbbbbbb");
+             console.log(back);
+             return back;
+        }
 
+
+        function getTree() {
+        // Some logic to retrieve, or generate tree structure
+            var tree = [
+              {
+                text: "Parent 1",
+                nodes: [
+                  {
+                    text: "Child 1",
+                    nodes: [
+                      {
+                        text: "Grandchild 1"
+                      },
+                      {
+                        text: "Grandchild 2"
+                      }
+                    ]
+                  },
+                  {
+                    text: "Child 2"
+                  }
+                ]
+              },
+              {
+                text: "Parent 2"
+              },
+              {
+                text: "Parent 3"
+              },
+              {
+                text: "Parent 4"
+              },
+              {
+                text: "Parent 5"
+              }
+            ];
+            return tree;
+        }
+        console.log("DDDDDDDDDDD");
+        $('#tree').treeview({data: dir_list()});
+    </script>
 {% endblock %}
