@@ -51,13 +51,14 @@ def get_posts_list(request, post_class, post_type):
 def get_post(request, inum):
     # 注意目录
     try:
-        file_popen = os.popen('find '+find_dir+' -inum '+str(inum))
-        file_path = file_popen.read().strip('\n')
-        file_popen.close()
+        # file_popen = os.popen('find '+find_dir+' -inum '+str(inum))
+        # file_path = file_popen.read().strip('\n')
+        # file_popen.close()
+        file_path = '/home/Memo/Ab___Python/YAML.md'
         with open(file_path) as f:
             file_content = f.read()
             #return Response(f.read())
-            return render(request, 'post_content.html',{'file_content':file_content})
+            return render(request, 'post_list.html',{'file_content':file_content})
     except Exception as e:
         print(Exception)
         print(e)
