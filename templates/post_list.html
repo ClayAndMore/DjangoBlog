@@ -2,7 +2,6 @@
 
 {% block css_content %}
 <script src="/static/js/bootstrap-treeview.js"></script>
-<script src="/static/js/strapdown.js"></script>
 
 <script src="/static/css/bootstrap-treeview.css"></script>
 <style type="text/css">
@@ -39,8 +38,13 @@
      <!--</div>-->
 
     <div class="container">
-      <div class="row">
-        <div id="tree" class="col-xs-3 pull-left"></div>
+        <div class="row">
+            <div class="col-xs-3 pull-left contailner">
+                <div class="row">        
+                    <div id="tree" class="col-xs-11 pull-left"></div>
+                    <div class="col-xs-1 pull-left"></div>
+                </div>
+            </div>
         <!--<div class="list-group col-xs-9">-->
 	<!--{% for da in data %}-->
 	 <!--<a href="{% url 'post' inum=da.inum %}" class="list-group-item">-->
@@ -50,9 +54,8 @@
 	<!--<br>-->
 	<!--{% endfor %}-->
 
-
-        <div id="tochange" class="col-xs-6"> </div>
-        <div class="col-xs-3" id="myScrollspy">
+        <div id="tochange" class="col-xs-8"> </div>
+        <div class="col-xs-1" id="myScrollspy">
             <ul class="nav nav-pills nav-stacked" id="myNav">
                 <!--<li class="active"><a href="#html">HTML</a></li>-->
 
@@ -61,13 +64,14 @@
 
 
 
-        </div>
       </div>
     </div>
 
 <xmp theme="a"  style="display:none;">
 {{ file_content|safe }}
 </xmp>
+
+<script src="/static/js/strapdown.js"></script>
 
 <script>
      function dir_list() {
