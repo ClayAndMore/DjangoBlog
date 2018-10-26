@@ -2,38 +2,48 @@ import os
 import re
 import copy
 import stat
+import json
 
 from django.shortcuts import render
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-# 定义一个全局变量，用于标识当前用户所在页级
-find_dir = '/root/posts' 
+from django.http import HttpResponse
 
+from .for_path import k_v_tree, to_bootstrap_tree 
+
+DIR = '/home/Memo/'
+find_dir = '/root/posts' 
+tree_list = to_bootstrap_tree(k_v_tree(DIR))
+tree_list_json = json.dumps(tree_list)
+def dir_list(request):
+    return HttpResponse(tree_list_json, content_type="application/json")
+ 
 # 博客列表
 def get_posts_list(request, post_class, post_type):
-    data = {'inum': 0,'title':'','time':''}
-    data_list = []
-    global find_dir
-    find_dir = '/root/posts/'+str(post_class)+'/'+str(post_type)
-    for filename in os.listdir(find_dir):
-        data['title'] = filename
-        filename_all = find_dir+'/'+str(filename)
-        file_open = open(filename_all)
-        data['inum'] = os.stat(filename_all).st_ino
-        index = 1
-        for line in file_open:
-            index+=1
-            # 找前四行的日期
-            if 'date' in line or index>4:
-                re_str = r'[0-9]{4}-[0-9]{2}-[0-9]{2}'
-                r = re.search(re_str, line.strip())
-                if r:
-                    data['time'] = r.group(0)
-                data_list.append(copy.deepcopy(data))
-                break
-     
+    #data = {'inum': 0,'title':'','time':''}
+    #data_list = []
+    #global find_dir
+    #find_dir = '/root/posts/'+str(post_class)+'/'+str(post_type)
+    #for filename in os.listdir(find_dir):
+    #    data['title'] = filename
+    #    filename_all = find_dir+'/'+str(filename)
+    #    file_open = open(filename_all)
+    #    data['inum'] = os.stat(filename_all).st_ino
+    #    index = 1
+    #    for line in file_open:
+    #        index+=1
+    #        # 找前四行的日期
+    #        if 'date' in line or index>4:
+    #            re_str = r'[0-9]{4}-[0-9]{2}-[0-9]{2}'
+    #            r = re.search(re_str, line.strip())
+    #            if r:
+    #                data['time'] = r.group(0)
+    #            data_list.append(copy.deepcopy(data))
+    #            break
+    # 
+    data_list = [{'inum': 111, 'title': 'ttt', 'time': 20180405}]
     return render(request,'post_list.html',{'data': data_list})
 
 # 具体博文
