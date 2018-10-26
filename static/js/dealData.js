@@ -31,6 +31,26 @@ function life_list(data) {
      return back;
 }
 
+function dir_list(){
+    var url = "/dir_list"
+    var back = []
+    $.ajax({
+        type: "get",
+        url: url,
+        async: false,
+        success: function(result, status){
+            back = result;  
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);
+       },
+    })
+    return back;
+}
+
+
 function getNaturalWidth(img) {
     for(var x=0;x<img.length;x++){	
     	var image = new Image();
