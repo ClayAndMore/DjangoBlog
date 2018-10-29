@@ -1,48 +1,20 @@
-{% extends "index_basic.html" %}
+<!DOCTYPE html>
+<html>
+<div id="tochange" class="col-xs-9">
+</div>
 
-{% block css_content %}
-    <style type="text/css">
-        ul.nav-pills{
-            width: 300px;
-        }
-        ul.nav-pills.affix{
-            top: 10px; /* Set the top position of pinned element */
-        }
-        #lists ul li{
-            padding: 2px;
-        }
-    </style>
-        <script type="text/javascript">
-        $(document).ready(function(){
-            $("#myNav").affix({
-                offset: {
-                    top: 320
-                }
-            });
-        });
-    </script>
-{% endblock %}
+<div class="col-xs-3" id="myScrollspy">
+    <ul class="nav nav-pills nav-stacked" id="myNav">
+        <!--<li class="active"><a href="#html">HTML</a></li>-->
+    </ul>
+</div>
 
-{% block main_body %}
-  <div class="container">
-      <div class="row">
-      <div id="tochange" class="col-xs-9">
-
-      </div>
-        <div class="col-xs-3" id="myScrollspy">
-            <ul class="nav nav-pills nav-stacked" id="myNav">
-                <!--<li class="active"><a href="#html">HTML</a></li>-->
-
-            </ul>
-        </div>
-      </div>
-  </div>
 <xmp theme="a"  style="display:none;">
 {{ file_content|safe }}
 </xmp>
 
-   <script src="/static/js/strapdown.js"></script>
-   <script type = "text/javascript">
+<script src="/static/js/strapdown.js"></script>
+<script type = "text/javascript">
        var mark_html = $("#content").html();
        $("#tochange").append(mark_html);
        // 切掉原来的
@@ -59,6 +31,6 @@
            add_h +=1;
            console.log(add_h);
        });
-
-   </script>
-{% endblock %}
+        
+</script>
+</html>
