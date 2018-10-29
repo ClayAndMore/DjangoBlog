@@ -43,17 +43,17 @@ def get_posts_list(request, post_class, post_type):
     #            data_list.append(copy.deepcopy(data))
     #            break
     # 
+    file_path = '/home/Memo/Ab___Python/.md'
+    with open(file_path) as f:
+        file_content = f.read()
     data_list = [{'inum': 111, 'title': 'ttt', 'time': 20180405}]
-    return render(request,'post_list.html',{'data': data_list})
+    return render(request,'post_list.html',{'file_content':file_content})
+    #return render(request,'post_list.html')
 
-# 具体博文
 #@api_view(['GET'])
-def get_post(request, inum):
+def get_post(request):
     # 注意目录
     try:
-        # file_popen = os.popen('find '+find_dir+' -inum '+str(inum))
-        # file_path = file_popen.read().strip('\n')
-        # file_popen.close()
         file_path = '/home/Memo/Ab___Python/YAML.md'
         with open(file_path) as f:
             file_content = f.read()
@@ -65,6 +65,25 @@ def get_post(request, inum):
         print('dddddddd')
         # return Response('不可修改参数')
         return render(request, 'post_content.html')
+
+# 具体博文
+def one_markdown(request, filename):
+    print ('AAAAAAAA', filename)
+    if not filename.endswith('.md') and '..' in filename: # 防止有人跳目录。
+        return HttpResponse(json.dumps('no'), content_type="application/json")
+    try:
+        file_popen = os.popen('find %s -name "%s"'%(DIR,filename))
+        file_path = file_popen.read().strip('\n')
+        file_popen.close()
+        with open(file_path) as f:
+            file_content = f.read()
+    except FileNotFoundError:
+        return HttpResponse(json.dumps('no'), content_type="application/json")
+        
+    file_content_json = json.dumps(file_content)
+
+    return render(request, 'post_list.html',{'file_content':file_content})
+    #return HttpResponse(file_content_json, content_type="application/json")
 
 # 归档
 @api_view(['GET'])
