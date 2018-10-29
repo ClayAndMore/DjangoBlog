@@ -45,26 +45,16 @@
                     <div class="col-xs-1 pull-left"></div>
                 </div>
             </div>
-        <!--<div class="list-group col-xs-9">-->
-	<!--{% for da in data %}-->
-	 <!--<a href="{% url 'post' inum=da.inum %}" class="list-group-item">-->
-		<!--<h4 class="list-group-item-heading" style="display:inline">{{ da.title }}</h4>-->
-		<!--<h5 style="display:inline;float:right" >{{ da.time }}</h5>-->
-        <!--</a>-->
-	<!--<br>-->
-	<!--{% endfor %}-->
+            <div id="tochange" class="col-xs-8">
+            </div>
 
-        <div id="tochange" class="col-xs-8"> </div>
-        <div class="col-xs-1" id="myScrollspy">
-            <ul class="nav nav-pills nav-stacked" id="myNav">
-                <!--<li class="active"><a href="#html">HTML</a></li>-->
+            <div class="col-xs-1" id="myScrollspy">
+                <ul class="nav nav-pills nav-stacked" id="myNav">
+                    <!--<li class="active"><a href="#html">HTML</a></li>-->
+                </ul>
+            </div>
 
-            </ul>
-        </div>
-
-
-
-      </div>
+       </div>
     </div>
 
 <xmp theme="a"  style="display:none;">
@@ -72,6 +62,28 @@
 </xmp>
 
 <script src="/static/js/strapdown.js"></script>
+<script type = "text/javascript">
+       var mark_html = $("#content").html();
+       $("#tochange").append(mark_html);
+       // 切掉原来的
+       $("#content").remove();
+//       添加链接
+       add_h_id = '';
+       var add_h = 1;
+       $(":header").each(function () {
+           add_h_id = 'add_h'+add_h;
+           tag = $( this )[0].tagName;
+           space_num = Number(tag.charAt(tag.length-1))-1;
+           console.log(space_num)
+           space_str =  new Array(space_num).join("&emsp;");
+           console.log(space_str);
+           $(this).attr('id',add_h_id);
+           var toadd = '<li><a href="#'+ add_h_id +'" style="font-size:15px" >'+ space_str  + $(this).text() +'</a></li>';
+           $("#myNav").append(toadd);
+           add_h +=1;
+       });
+        
+</script>
 
 <script>
      function dir_list() {
@@ -96,24 +108,42 @@
          return back;
     }
 
-   var mark_html = $("#content").html();
-   $("#tochange").append(mark_html);
-   // 切掉原来的
-   $("#content").remove();
-   //添加链接
-   add_h_id = '';
-   var add_h = 1;
-   $(":header").each(function () {
-       add_h_id = 'add_h'+add_h ;
-       console.log(add_h_id);
-       $(this).attr('id',add_h_id);
-       var toadd = '<li><a href="#'+ add_h_id +'" style="font-size:15px" >'+ $(this).text() +'</a></li>';
-       $("#myNav").append(toadd);
-       add_h +=1;
-       console.log(add_h);
-   });
 
-    $('#tree').treeview({data: dir_list()});
+    $('#tree').treeview({
+        data: dir_list(),
+        //onNodeChecked: function (event,data) {
+        //       alert(data.nodeId);
+        //},
+        onNodeSelected: function (event, data) {
+            if(!data.nodes){
+                window.location.href="/p/post/content/" + data.text + "/";
+            }
+        //$.ajax({
+        //    type: "get",
+        //    url: "/p/post/content/" + data.text + "/",
+        //    async: false,
+        //    //dataType: "json",
+        //    success: function (result) {
+        //        //alert('success');
+        //        console.log(typeof(result));
+        //        //if (result !== 'no'){
+        //        //   console.log('sssssssss');
+        //        //   var mark_html = $("#content").html();
+        //        //   $("#tochange").append(mark_html);
+        //        //   // 切掉原来的
+        //        //   $("#content").remove();
+        //        //}
+        //        console.log(result);
+        //    //render_life(result);
+        //    },
+        //    error: function(XMLHttpRequest, textStatus, errorThrown) {
+        //    //alert(XMLHttpRequest.status);
+        //        alert(XMLHttpRequest.readyState);
+        //        alert(textStatus);
+        //   },
+        // });
+        }
+        });
 </script>
 
 
