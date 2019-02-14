@@ -1,0 +1,3 @@
+[submodule "Memo"]
+	path = Memo
+	url = git@github.com:ClayAndMore/Memo.git
