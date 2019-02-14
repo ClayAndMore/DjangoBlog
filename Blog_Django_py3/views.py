@@ -59,7 +59,7 @@ def mylife(request):
     years_dis = set()
     for year in years:
         years_dis.add(year['text_time'].year)
-    return render(request, 'life.html', {'years_dis':sorted(years_dis)}) 
+    return render(request, 'life.html', {'years_dis': sorted(years_dis)})
 
 @api_view(['GET'])
 def life_list(request, year):

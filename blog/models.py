@@ -24,6 +24,9 @@ class Essay(models.Model):
     def get_day(self):
         return self.text_time.day
 
+    class Meta:
+        db_table = 'essays'
+
 # the images models
 class Images(models.Model):
     IMAGE_KIND = (

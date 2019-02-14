@@ -13,6 +13,8 @@ def k_v_tree(path):
     k_v_dict = OrderedDict()
     for dirpath, dirnames, filenames in os.walk(path):
         if '.git' in dirpath: continue
+        if '.git' in dirnames: dirnames.remove('.git')
+        filenames = [x for x in filenames if not x.startswith('.')]
 
         #print dirpath, dirnames, filenames    
         if not PY3:
