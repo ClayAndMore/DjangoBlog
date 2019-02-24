@@ -1,0 +1,25 @@
+{% extends "index_basic.html" %}
+
+{% block main_body %}
+<div class="container">
+	    <div class="row">
+        	<div class="col-sm-8"></div>
+		    <h3 class="col-sm-4">{{ archive }}</h3>
+        </div>
+        <div class="row">
+        	<div class="col-sm-7"></div>
+            <div class="col-sm-5" style="height:1px; background: red;"></div>
+        </div>
+        <div class="row">
+
+            {% for filename in contents %}
+            <div class="col-sm-4">
+                <a type="button" href="post/content/{{ filename }}" class="list-group-item">{{ filename }}</a>
+            </div>
+            {% endfor %}
+
+        </div>
+    <div></div>
+
+</div>
+{% endblock %}

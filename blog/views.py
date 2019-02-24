@@ -11,7 +11,7 @@ from rest_framework.response import Response
 
 from django.http import HttpResponse
 
-from .for_path import k_v_tree, to_bootstrap_tree 
+from .for_path import k_v_tree, to_bootstrap_tree, get_tags_nums, get_tags_conf
 
 DIR = '../Memo/' #'/home/Memo/'
 find_dir = '/root/posts' 
@@ -64,8 +64,28 @@ def one_markdown(request, filename):
 
 # 归档
 @api_view(['GET'])
-def archiving(request):
-    return Response('归档')
+def archives(request):
+    archives = get_tags_nums(DIR)
+    # from pprint import  pprint
+    # pprint(archives)
+    return render(request, 'archives.html', {'archives': archives})
+
+@api_view(['GET'])
+def archive_get(request):
+    archive = request.GET.get('tag','')
+    all_achives = get_tags_conf(DIR)
+    if archive and archive in all_achives:
+        num = len(all_achives[archive])
+        contents = all_achives[archive]
+        print(1111, num )
+        return render(request, 'archive_contents.html',{
+            'archive': archive,
+            'contents': contents,
+            'num': num
+        })
+
+    else:
+        return 'no this archive'
 
 # 关于我
 @api_view(['GET'])

@@ -1,0 +1,23 @@
+{% extends "index_basic.html" %}
+
+{% block main_body %}
+<div class="container">
+    {% for arch_l in archives %}
+        <div class="row">
+        {% for tag_head, tag_num in arch_l.items %}
+             <div class="col-sm-3">
+                <a href="{% url 'archive_get' %}?tag={{ tag_head }}"  style="font-size:24px;">
+                    <span class="label label-info">{{ tag_head }}
+                    <span class="badge">{{ tag_num }}</span></span>
+                </a>
+             </div>
+
+        {% endfor %}
+        </div>
+    <div/><br></div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+ <!--<span class="glyphicon glyphicon-asterisk" aria-hidden="true">{{ tag_head }}</span>-->
+                  <!--<span class="glyphicon-class">{{ tag_num }}</span>-->

@@ -51,8 +51,6 @@ def message(request):
     return render(request, 'message.html', {'form':form,'messages':messages,'error':error})
 
 
-def archiving(requst):
-    return None
 
 def mylife(request):
     years = Essay.objects.values('text_time')
