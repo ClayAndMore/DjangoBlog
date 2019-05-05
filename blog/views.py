@@ -45,7 +45,6 @@ def get_post(request):
 
 # 具体博文
 def one_markdown(request, filename):
-    print ('AAAAAAAA', filename)
     if '..' in filename: # 防止有人跳目录。
         return HttpResponse(json.dumps('no'), content_type="application/json")
     try:
@@ -62,13 +61,14 @@ def one_markdown(request, filename):
     return render(request, 'post_list.html', {'file_content':file_content})
     #return HttpResponse(file_content_json, content_type="application/json")
 
-# 归档
+# 分类
 @api_view(['GET'])
 def archives(request):
     archives = get_tags_nums(DIR)
     # from pprint import  pprint
     # pprint(archives)
     return render(request, 'archives.html', {'archives': archives})
+
 
 @api_view(['GET'])
 def archive_get(request):
@@ -77,7 +77,7 @@ def archive_get(request):
     if archive and archive in all_achives:
         num = len(all_achives[archive])
         contents = all_achives[archive]
-        print(1111, num )
+        # print(1111, num )
         return render(request, 'archive_contents.html',{
             'archive': archive,
             'contents': contents,

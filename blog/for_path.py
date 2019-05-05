@@ -110,7 +110,7 @@ def get_tags_conf(path):
     else:
         return make_tags_config(path)
 
-
+EVERY_LINE_NUMS = 5 # 每行显示标签的页数。
 def get_tags_nums(path):
     conf = get_tags_conf(path)
 
@@ -125,7 +125,7 @@ def get_tags_nums(path):
     for x in sorted_conf:
         i = i+1
         tem_dict[x] = sorted_conf[x]
-        if i % 4 == 0:
+        if i % EVERY_LINE_NUMS == 0:
             res_list.append(copy.deepcopy(tem_dict))
             tem_dict = {}
 

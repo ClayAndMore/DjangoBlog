@@ -5,7 +5,7 @@
     {% for arch_l in archives %}
         <div class="row">
         {% for tag_head, tag_num in arch_l.items %}
-             <div class="col-sm-3">
+             <div class="col-sm-2">
                 <a href="{% url 'archive_get' %}?tag={{ tag_head }}"  style="font-size:24px;">
                     <span class="label label-info">{{ tag_head }}
                     <span class="badge">{{ tag_num }}</span></span>

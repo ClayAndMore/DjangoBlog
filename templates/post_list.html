@@ -40,9 +40,9 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-3 pull-left contailner">
-                <div class="row">        
-                    <div id="tree" class="col-xs-11 pull-left"></div>
-                    <div class="col-xs-1 pull-left"></div>
+                <div class="row">
+                    <div class="col-xs-1 treeview"></div>
+                    <div id="tree" class="col-xs-11 pull-left" style="font-size:15px"></div>
                 </div>
             </div>
             <div id="tochange" class="col-xs-8">
@@ -111,6 +111,11 @@
 
     $('#tree').treeview({
         data: dir_list(),
+        color: "#428bca",
+        levels: 0,  // 默认展开层级
+        collapseIcon: "glyphicon glyphicon-chevron-down", // 收缩图标
+        expandIcon: "glyphicon glyphicon-chevron-right", //展开图标
+        showBorder: false,
         //onNodeChecked: function (event,data) {
         //       alert(data.nodeId);
         //},
@@ -118,30 +123,7 @@
             if(!data.nodes){
                 window.location.href="/p/post/content/" + data.text + "/";
             }
-        //$.ajax({
-        //    type: "get",
-        //    url: "/p/post/content/" + data.text + "/",
-        //    async: false,
-        //    //dataType: "json",
-        //    success: function (result) {
-        //        //alert('success');
-        //        console.log(typeof(result));
-        //        //if (result !== 'no'){
-        //        //   console.log('sssssssss');
-        //        //   var mark_html = $("#content").html();
-        //        //   $("#tochange").append(mark_html);
-        //        //   // 切掉原来的
-        //        //   $("#content").remove();
-        //        //}
-        //        console.log(result);
-        //    //render_life(result);
-        //    },
-        //    error: function(XMLHttpRequest, textStatus, errorThrown) {
-        //    //alert(XMLHttpRequest.status);
-        //        alert(XMLHttpRequest.readyState);
-        //        alert(textStatus);
-        //   },
-        // });
+
         }
         });
 </script>

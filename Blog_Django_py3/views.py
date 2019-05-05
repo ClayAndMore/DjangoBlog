@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import sys
+import json
 import datetime
 
 from .form import MessageForm 
@@ -25,7 +26,14 @@ def message(request):
     form = MessageForm()
     messages = []
     error = ''
+    messages = Message.objects.all().order_by('-time')
     if request.method == 'POST':
+        conf = {'message': 'disabled'}
+        with open('./toggle_message.conf', 'r') as f:
+            conf = json.load(f)
+        if conf.get('message', 'disabled') == 'disabled':
+            error = '该功能现只对个人开放'
+            return render(request, 'message.html', {'form': form, 'messages': messages, 'error': error})
         form = MessageForm(request.POST)
         if form.is_valid():
             ip = request.META['REMOTE_ADDR']
@@ -45,9 +53,6 @@ def message(request):
         else:
             print(form.errors.as_data())
 
-    # 渲染留言列表
-    else:
-        messages = Message.objects.all().order_by('-time') 
     return render(request, 'message.html', {'form':form,'messages':messages,'error':error})
 
 

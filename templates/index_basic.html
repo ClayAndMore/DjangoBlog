@@ -22,6 +22,10 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <style type = "text/css">
+     * {font-family: "Microsoft Yahei", "Heiti SC",Arial,”Helvetica Neue“,”Hiragino Sans GB”,Simsun,sans-self;}
+    </style>
   </head>
   <body>
 
@@ -42,7 +46,7 @@
             </li>
 
             <li>
-              <a href="{% url 'archives' %}">归档</a>
+              <a href="{% url 'archives' %}">分类</a>
             </li>
 
             <li>
@@ -53,7 +57,7 @@
 
           <ul class="nav navbar-nav navbar-right">
 	    <li><a href="{% url 'aboutMe' %}" target="_blank">关于我</a></li>
-	    <li><a href="{% url 'messages' %}" target="_blank">留下你的脚印👣</a></li>
+	    <li><a href="{% url 'messages' %}" target="_blank">个人脚印👣</a></li>
 	    <li><a href="{% url 'life' %}">㊙</a></li>
           </ul>
 

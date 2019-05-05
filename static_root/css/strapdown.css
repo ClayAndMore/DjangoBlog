@@ -16,6 +16,11 @@ xmp, textarea {
   display: none;
 }
 
+
+h3 {
+  font-size: 25px;
+}
+
 h1,h2,h3,h4 {
   margin: 15px 0;
 }
