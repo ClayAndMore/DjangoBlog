@@ -1,3 +1,4 @@
+# coding:utf-8
 import os
 import re
 import copy
@@ -5,6 +6,7 @@ import stat
 import json
 
 from django.shortcuts import render
+from django.conf import settings
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -13,7 +15,7 @@ from django.http import HttpResponse
 
 from .for_path import k_v_tree, to_bootstrap_tree, get_tags_nums, get_tags_conf
 
-DIR = '../Memo/' #'/home/Memo/'
+DIR = './Memo/' # 相对于运行目录
 find_dir = '/root/posts' 
 tree_list = to_bootstrap_tree(k_v_tree(DIR))
 tree_list_json = json.dumps(tree_list)
@@ -45,6 +47,7 @@ def get_post(request):
 
 # 具体博文
 def one_markdown(request, filename):
+    print(111111,os.getcwd(), settings.BASE_DIR)
     if '..' in filename: # 防止有人跳目录。
         return HttpResponse(json.dumps('no'), content_type="application/json")
     try:
