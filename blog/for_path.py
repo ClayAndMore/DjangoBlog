@@ -9,7 +9,7 @@ from collections import OrderedDict, defaultdict
 
 PY3 = sys.version_info[0] == 3
 
-print(1111,sys.getdefaultencoding())
+#print(1111,sys.getdefaultencoding())
 
 def k_v_tree(path):
     """ 目录结构变成k-v
@@ -29,7 +29,9 @@ def k_v_tree(path):
     k_v_dict = OrderedDict()
     for dirpath, dirnames, filenames in os.walk(path):
         if '.git' in dirpath: continue
+        if 'TODO' in dirpath: continue
         if '.git' in dirnames: dirnames.remove('.git')
+        if 'TODO' in dirnames: dirnames.remove('TODO')
         filenames = [x for x in filenames if not x.startswith('.')]
 
         #print dirpath, dirnames, filenames    
@@ -88,18 +90,34 @@ def to_bootstrap_tree(kv_tree):
       }
     ];
     """
+
+
     tree_list = []
+
+     # level: 现在遍历的层级, 只有第一层的时候不做目录和文章的排序
+
     def trans(kv_dict, node):
-        i = 0 # 控制加入数组的下标
         for k, v in sorted(kv_dict.items()):
             if not v:
                 node.append({'text': k})
             else:
-                node.append({'text': k, 'nodes': []})
-                trans(v, node[i]['nodes'])
-            i += 1
+                if '__' in k:
+                    node.append({'text': k, 'nodes': []})
+                    trans(v, node[len(node)-1]['nodes'])
+                else:
+                    node.insert(0, {'text': k, 'nodes': []})
+                    trans(v, node[0]['nodes'])
+
          
     trans(kv_tree, tree_list)
+
+    # 把目录跳出来放前面
+    # res_tree_list = []
+    # for item in tree_list:
+    #     if item.get('nodes'):
+    #         tree_list
+    #         res_tree_list.append()
+
     return tree_list
 
 TAG_FILE = './tags.conf'
