@@ -32,7 +32,7 @@ else:
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '211.159.177.235']
+ALLOWED_HOSTS = ['localhost', '211.159.177.235', 'www.claymore.wang','172.17.0.1', 'claymore.wang']
 
 
 # Application definition

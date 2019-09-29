@@ -189,7 +189,7 @@ def make_tags_config(path):
                         all_tags[tag.strip()].append(fn)
     with open(TAG_FILE, 'w') as f:
         #pprint(dict(all_tags))
-        json.dump(dict(all_tags), f)
+        json.dump(dict(all_tags), f, indent=4)
     return all_tags
 
 
